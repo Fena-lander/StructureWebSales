@@ -15,5 +15,8 @@ namespace WebSales.Data
         }
 
         public DbSet<WebSales.Models.Department> Department { get; set; } = default!;
+        public DbSet<WebSales.Models.Saler> Saler { get; set; } = default!;
+        public DbSet<WebSales.Models.SalesRecord> SalesRecord { get; set; } = default!;
+
     }
 }
