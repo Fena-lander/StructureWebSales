@@ -1,14 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using WebSales.Services;
 using WebSales.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var seedingService = new SeedingService();
 
 // Add services to the container.
 
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ISellerService, SellerService>();
 
 var connectionString = builder.Configuration.GetConnectionString("WebSalesContext");
 IServiceCollection serviceCollection = builder.Services.AddDbContext<WebSalesContext>(options =>
