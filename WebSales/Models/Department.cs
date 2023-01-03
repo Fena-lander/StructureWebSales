@@ -8,7 +8,7 @@ namespace WebSales.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Saler> Salers { get; set; } = new List<Saler>();
+        public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
 
         public Department()
         {
@@ -21,14 +21,14 @@ namespace WebSales.Models
             Name = name;
         }
 
-        public void AddSaler(Saler saler)
+        public void AddSaler(Seller saler)
         {
-            Salers.Add(saler);
+            Sellers.Add(saler);
         }
 
         public double TotalSales(DateTime initial, DateTime final)
         {
-            return Salers.Sum(saler => saler.TotalSales(initial, final));
+            return Sellers.Sum(saler => saler.TotalSales(initial, final));
         }
     }
 

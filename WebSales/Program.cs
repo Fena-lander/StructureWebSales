@@ -3,22 +3,33 @@ using Microsoft.Extensions.DependencyInjection;
 using WebSales.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("WebSalesContext");
-IServiceCollection serviceCollection = builder.Services.AddDbContext<WebSalesContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))) ?? 
-                     throw new InvalidOperationException("Connection string 'WebSalesContext' not found."); ;
+var seedingService = new SeedingService();
 
 // Add services to the container.
+
+builder.Services.AddScoped<SeedingService>();
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("WebSalesContext");
+IServiceCollection serviceCollection = builder.Services.AddDbContext<WebSalesContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))) ??
+                     throw new InvalidOperationException("Connection string 'WebSalesContext' not found."); ;
+
+
 var app = builder.Build();
+
+app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingService>().Seed();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();

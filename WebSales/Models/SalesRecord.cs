@@ -8,20 +8,20 @@ namespace WebSales.Models
         public DateTime Date { get; set; }
         public double Amount { get; set; }
         public SalesStatus Status { get; set; }
-        public Saler Saler { get; set; }
+        public Seller Seller { get; set; }
 
         public SalesRecord()
         {
 
         }
 
-        public SalesRecord(int id, DateTime date, double amount, SalesStatus status, Saler saler)
+        public SalesRecord(int id, DateTime date, double amount, SalesStatus status, Seller saler)
         {
             Id = id;
             Date = date;
             Amount = amount;
             Status = status;
-            Saler = saler;
+            Seller = saler;
         }
     }
 }
