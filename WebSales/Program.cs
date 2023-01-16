@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ISellerService, SellerService>();
+builder.Services.AddScoped<SellerService>();
 builder.Services.AddScoped<DepartmentService>();
 
 var connectionString = builder.Configuration.GetConnectionString("WebSalesContext");
