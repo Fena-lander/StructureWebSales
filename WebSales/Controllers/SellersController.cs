@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebSales.Models;
 using WebSales.Services;
+using WebSales.Models.ViewModels;
 
 namespace WebSales.Controllers
 {
     public class SellersController : Controller
     {
         private readonly ISellerService _sellerService;
+        private readonly DepartmentService _departmentService;
 
-        public SellersController(ISellerService sellerService)
+        public SellersController(ISellerService sellerService, DepartmentService departmentService)
         {
             _sellerService = sellerService;
+            _departmentService = departmentService;
         }
 
         public IActionResult Index()
@@ -20,7 +23,9 @@ namespace WebSales.Controllers
         }
          public IActionResult Create()
         {
-            return View();
+            var departments = _departmentService.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = departments };
+            return View(viewModel);
         }
 
         [HttpPost]

@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ISellerService, SellerService>();
+builder.Services.AddScoped<DepartmentService>();
 
 var connectionString = builder.Configuration.GetConnectionString("WebSalesContext");
 IServiceCollection serviceCollection = builder.Services.AddDbContext<WebSalesContext>(options =>
