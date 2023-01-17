@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using WebSales.Services;
 using WebSales.Data;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,6 @@ var connectionString = builder.Configuration.GetConnectionString("WebSalesContex
 IServiceCollection serviceCollection = builder.Services.AddDbContext<WebSalesContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))) ??
                      throw new InvalidOperationException("Connection string 'WebSalesContext' not found."); ;
-
 
 var app = builder.Build();
 
