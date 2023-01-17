@@ -1,6 +1,7 @@
 ﻿using WebSales.Data;
 using WebSales.Models;
 using Microsoft.EntityFrameworkCore;
+using WebSales.Services.Exceptions;
 
 namespace WebSales.Services
 {
@@ -31,6 +32,22 @@ namespace WebSales.Services
             var obj = _context.Seller.Find(id);
             _context.Seller.Remove(obj);
             _context.SaveChanges();
+        }
+        public void Update(Seller obj)
+        {
+            if (!_context.Seller.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id não encontrado");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch(DbConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }
