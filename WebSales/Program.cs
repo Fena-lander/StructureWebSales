@@ -13,6 +13,7 @@ builder.Services.AddScoped<SeedingService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<SellerService>();
 builder.Services.AddScoped<DepartmentService>();
+builder.Services.AddScoped<SalesRecordService>();
 
 var connectionString = builder.Configuration.GetConnectionString("WebSalesContext");
 IServiceCollection serviceCollection = builder.Services.AddDbContext<WebSalesContext>(options =>

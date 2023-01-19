@@ -34,12 +34,15 @@ namespace WebSales.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Seller seller)
         {
+            /*
             if (!ModelState.IsValid)
             {
                 var departments = await _departmentService.FindAllAsync();
                 var viewModel= new SellerFormViewModel { Seller = seller, Departments = departments };
-                return View(seller);
+                return View(viewModel);
             }
+        -> Por algum motivo não funciona esta validação, descobrir o PQ!!!!
+            */
             await _sellerService.InsertAsync(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -95,12 +98,15 @@ namespace WebSales.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Seller seller)
         {
+            /*
             if (!ModelState.IsValid)
             {
                 var departments = await _departmentService.FindAllAsync();
                 var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
-                return View(seller);
+                return View(viewModel);
             }
+        -> Por algum motivo não funciona esta validação, descobrir o PQ!!!!
+            */
             if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não Igual" });
@@ -116,7 +122,8 @@ namespace WebSales.Controllers
             }
         }
 
-        //Error não precisa ser assincrona por não ter acesso a dados
+        // Error não precisa ser assincrona por não ter acesso a dados
+        // Retorna direto a View
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel

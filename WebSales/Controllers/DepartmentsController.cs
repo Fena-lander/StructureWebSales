@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebSales.Data;
 using WebSales.Models;
-/*
+
 namespace WebSales.Controllers
 {
     public class DepartmentsController : Controller
@@ -159,4 +159,4 @@ namespace WebSales.Controllers
         }
     }
 }
-*/
+
